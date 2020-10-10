@@ -1,0 +1,29 @@
+.### Vagrant ###
+# General
+.vagrant/
+
+# Log files (if you are creating logs in debug mode, uncomment this)
+*.log
+
+# OS-specific
+.DS_Store
+
+### Vagrant Patch ###
+*.box
+
+*.gz
+*.tgz
+*.zip
+*.jar
+
+flyway.properties
+
+modules/oracle/files/oracle-xe-11.2.0-1.0.x86_64.rpm.zip
+modules/java
+modules/maven
+modules/stdlib
+modules/wget
+
+oracle-jdbc/ojdbc6.jar
+
+target
