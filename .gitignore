@@ -1,0 +1,10 @@
+#Vagrant stuff
+.vagrant/
+
+*.jar
+*.gz
+*.zip
+*.rpm
+*.log
+
+.DS_Store
