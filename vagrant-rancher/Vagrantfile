@@ -15,7 +15,7 @@ Vagrant.configure("2") do |config|
     srv1.vm.provider :virtualbox do |v|
       v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
       v.customize ["modifyvm", :id, "--natdnsproxy1", "on"]
-      v.customize ["modifyvm", :id, "--memory", 1024]
+      v.customize ["modifyvm", :id, "--memory", 2048]
       v.customize ["modifyvm", :id, "--name", "srv-rancher-1"]
       v.customize ["modifyvm", :id, "--cpus", "2"]
     end
@@ -33,7 +33,7 @@ Vagrant.configure("2") do |config|
     srv1.vm.provider :virtualbox do |v|
       v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
       v.customize ["modifyvm", :id, "--natdnsproxy1", "on"]
-      v.customize ["modifyvm", :id, "--memory", 512]
+      v.customize ["modifyvm", :id, "--memory", 1024]
       v.customize ["modifyvm", :id, "--name", "srv-rancher-2"]
       v.customize ["modifyvm", :id, "--cpus", "1"]
     end
@@ -51,7 +51,7 @@ Vagrant.configure("2") do |config|
     srv1.vm.provider :virtualbox do |v|
       v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
       v.customize ["modifyvm", :id, "--natdnsproxy1", "on"]
-      v.customize ["modifyvm", :id, "--memory", 512]
+      v.customize ["modifyvm", :id, "--memory", 1024]
       v.customize ["modifyvm", :id, "--name", "srv-rancher-3"]
       v.customize ["modifyvm", :id, "--cpus", "1"]
     end
