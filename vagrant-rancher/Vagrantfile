@@ -6,14 +6,59 @@
 # backwards compatibility). Please don't change it unless you know what
 # you're doing.
 Vagrant.configure("2") do |config|
-  config.vm.box = "geerlingguy/centos7"
-  config.vm.network :private_network, ip: "192.168.33.12"
-  config.vm.hostname = "srv-rancher"
-  config.vm.provider :virtualbox do |v|
-    v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
-    v.customize ["modifyvm", :id, "--natdnsproxy1", "on"]
-    v.customize ["modifyvm", :id, "--memory", 3072]
-    v.customize ["modifyvm", :id, "--name", "srv-rancher"]
-    v.customize ["modifyvm", :id, "--cpus", "2"]
+
+  # rancher server 1
+  config.vm.define "srv-rancher-1" do |srv1|
+    srv1.vm.box = "geerlingguy/centos7"
+    srv1.vm.network :private_network, ip: "192.168.33.12"
+    srv1.vm.hostname = "srv-rancher-1"
+    srv1.vm.provider :virtualbox do |v|
+      v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+      v.customize ["modifyvm", :id, "--natdnsproxy1", "on"]
+      v.customize ["modifyvm", :id, "--memory", 1024]
+      v.customize ["modifyvm", :id, "--name", "srv-rancher-1"]
+      v.customize ["modifyvm", :id, "--cpus", "2"]
+    end
+    config.vm.provision "shell", inline: <<-SHELL
+      sed -i 's/ChallengeResponseAuthentication no/ChallengeResponseAuthentication yes/g' /etc/ssh/sshd_config
+      service sshd restart
+    SHELL
   end
+
+  # rancher server 2
+  config.vm.define "srv-rancher-2" do |srv1|
+    srv1.vm.box = "geerlingguy/centos7"
+    srv1.vm.network :private_network, ip: "192.168.33.13"
+    srv1.vm.hostname = "srv-rancher-2"
+    srv1.vm.provider :virtualbox do |v|
+      v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+      v.customize ["modifyvm", :id, "--natdnsproxy1", "on"]
+      v.customize ["modifyvm", :id, "--memory", 512]
+      v.customize ["modifyvm", :id, "--name", "srv-rancher-2"]
+      v.customize ["modifyvm", :id, "--cpus", "1"]
+    end
+    config.vm.provision "shell", inline: <<-SHELL
+      sed -i 's/ChallengeResponseAuthentication no/ChallengeResponseAuthentication yes/g' /etc/ssh/sshd_config
+      service sshd restart
+    SHELL
+  end
+
+  # rancher server 3
+  config.vm.define "srv-rancher-3" do |srv1|
+    srv1.vm.box = "geerlingguy/centos7"
+    srv1.vm.network :private_network, ip: "192.168.33.14"
+    srv1.vm.hostname = "srv-rancher-3"
+    srv1.vm.provider :virtualbox do |v|
+      v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+      v.customize ["modifyvm", :id, "--natdnsproxy1", "on"]
+      v.customize ["modifyvm", :id, "--memory", 512]
+      v.customize ["modifyvm", :id, "--name", "srv-rancher-3"]
+      v.customize ["modifyvm", :id, "--cpus", "1"]
+    end
+    config.vm.provision "shell", inline: <<-SHELL
+      sed -i 's/ChallengeResponseAuthentication no/ChallengeResponseAuthentication yes/g' /etc/ssh/sshd_config
+      service sshd restart
+    SHELL
+  end
+
 end
